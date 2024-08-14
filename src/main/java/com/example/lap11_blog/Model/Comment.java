@@ -1,0 +1,35 @@
+package com.example.lap11_blog.Model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+
+@Entity
+@AllArgsConstructor
+@Data
+@NoArgsConstructor
+
+
+public class Comment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+
+    @Column(columnDefinition = "int not null ")
+    private int user_id ;
+    @Column(columnDefinition = "int not null ")
+    private int post_id ;
+    @Column(columnDefinition = "varchar(50) not null ")
+    private String content ;
+    @Column(columnDefinition = "datetime ")
+    private LocalDate comment_date ;
+
+
+
+
+}
