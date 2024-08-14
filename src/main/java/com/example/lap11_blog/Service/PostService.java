@@ -3,7 +3,9 @@ package com.example.lap11_blog.Service;
 
 import com.example.lap11_blog.Api.ApiException;
 import com.example.lap11_blog.Model.Post;
+import com.example.lap11_blog.Model.User;
 import com.example.lap11_blog.Repository.PostRepository;
+import com.example.lap11_blog.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,16 +17,30 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
     public List<Post> getAllPost(){
         return postRepository.findAll();
     }
 
     public void addPost(Post post){
+        User u = userRepository.findById(post.getUser_id());
+
+        if(u == null){
+            throw new ApiException("user not found");
+        }
+
+
         postRepository.save(post);
     }
 
     public void updatePost( int id , Post post ){
+
+        User u = userRepository.findById(post.getUser_id());
+
+        if(u == null){
+            throw new ApiException("user not found");
+        }
 
         Post post1 = postRepository.findById(id);
 
